@@ -9,6 +9,8 @@ print(fc1)
 print(sig)
 print(fc2)
 
+NN = [fc1, sig, fc2]
+
 criterion = nn.CrossEntropyLoss()
 
 print("fc1_weight shape : ", fc1.weight.shape)
