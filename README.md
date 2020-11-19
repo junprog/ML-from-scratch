@@ -1,4 +1,4 @@
-# nn-from-scratch
+# NN-from-scratch
 Create Neural Network from Scratch with Numpy (multi-class classification)
 
 ## Essestials
@@ -13,3 +13,11 @@ Create Neural Network from Scratch with Numpy (multi-class classification)
     
 * Optimizer
     * SGD (with Momentum)
+
+## Run
+* requirements
+    * python >= 3.6
+    * numpy == 1.18.1 (ambiguous)
+```bash
+$ python main.py
+```
