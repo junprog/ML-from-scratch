@@ -15,6 +15,12 @@ class Linear:
     def __call__(self, x):
         self.x = x
         return np.dot(self.x, self.weight) + self.bias
+    
+    def __repr__(self):
+        return "Linear(input_size={}, output_size={})".format(self.inputs_size, self.outputs_size)
+
+    def __str__(self):
+        return "Linear(input_size={}, output_size={})".format(self.inputs_size, self.outputs_size)
 
     def backward(self, grad_out):
         self.weight_grad = np.dot(self.x.T, grad_out)
@@ -34,6 +40,12 @@ class Sigmoid:
         self.register_out = 1 / (1 + np.exp((-1)*x))
         return self.register_out
 
+    def __repr__(self):
+        return "Sigmoid()"
+
+    def __str__(self):
+        return "Sigmoid()"
+
     def backward(self, grad_out):
         return grad_out * (1.0 - self.register_out) * self.register_out
 
@@ -44,6 +56,12 @@ class ReLU:
     def __call__(self, x):
         self.register_out = np.maximum(0, x)
         return self.register_out
+
+    def __repr__(self):
+        return "ReLU()"
+
+    def __str__(self):
+        return "ReLU()"
 
     def backward(self, grad_out):
         return np.where(self.register_out > 0, grad_out, 0)
@@ -57,6 +75,12 @@ class CrossEntropyLoss:
         self.logits = softmax(outputs)
         self.target = target
         return -(target * np.log(self.logits + 1e-323)).sum()
+    
+    def __repr__(self):
+        return "CrossEntropyLoss()"
+
+    def __str__(self):
+        return "CrossEntropyLoss()"
 
     def backward(self):
         return self.logits - self.target

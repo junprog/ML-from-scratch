@@ -1,10 +1,14 @@
 import numpy as np
 import nn.Module as nn
 
-
 fc1 = nn.Linear(4,8)
 sig = nn.Sigmoid()
 fc2 = nn.Linear(8,3)
+
+print(fc1)
+print(sig)
+print(fc2)
+
 criterion = nn.CrossEntropyLoss()
 
 print("fc1_weight shape : ", fc1.weight.shape)
