@@ -1,2 +1,15 @@
 # nn-from-scratch
-Create Neural Network from Scratch with Numpy
+Create Neural Network from Scratch with Numpy (multi-class classification)
+
+## Essestials
+* Neural Network model
+    * Linear layer
+    * Activation function
+        * ReLU
+        * Sigmoid
+
+* Loss function
+    * Cross Entoropy
+    
+* Optimizer
+    * SGD (with Momentum)
