@@ -6,16 +6,19 @@ import nn.Module as nn
 from utils import AverageMeter, Logger
 
 class NeuralNet:
-    def __init__(self, in_dim=8):
+    def __init__(self, in_dim=8, activation='sigmoid'):
         self.fc1  = nn.Linear(4,in_dim)
-        self.sigmoid = nn.ReLU()
+        if activation == 'sigmoid':
+            self.activation = nn.Sigmoid()
+        elif activation == 'relu':
+            self.activation = nn.ReLU()
         self.fc2 = nn.Linear(in_dim,3)
 
         self.criterion = nn.CrossEntropyLoss()
 
     def forward(self, x, target):
         x = self.fc1(x)
-        x = self.sigmoid(x)
+        x = self.activation(x)
         out = self.fc2(x)
         loss = self.criterion(out, target)
 
@@ -24,7 +27,7 @@ class NeuralNet:
     def backward(self):
         dy = self.criterion.backward()
         dy = self.fc2.backward(dy)
-        dy = self.sigmoid.backward(dy)
+        dy = self.activation.backward(dy)
         dy = self.fc1.backward(dy)
 
     def update_params(self, lr=1e-1):
