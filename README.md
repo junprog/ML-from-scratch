@@ -15,7 +15,6 @@ Creating Neural Network from Scratch with Numpy (multi-class classification)
     * SGD
 
 ## 2. How to use
-
 ```python
 ## import this
 import nn.Module as nn
@@ -55,6 +54,7 @@ model = NN() ## instance
     * python >= 3.6
     * numpy == 1.18.1 (ambiguous)
     * scipy == 1.5.2  (ambiguous)
+    * pandas (only titanic datasets)
 ```bash
 $ python main.py
 ```

@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 class AverageMeter:
     """Computes and stores the average and current value"""
@@ -16,7 +17,6 @@ class AverageMeter:
         self.sum += val * n
         self.count += n
         self.avg = self.sum / self.count
-
 
 class Logger:
     def __init__(self, path, header):
@@ -36,3 +36,11 @@ class Logger:
             write_values.append(values[col])
         self.logger.writerow(write_values)
         self.log_file.flush()
+
+class IrisDataset:
+    def __init__(self, data_path, test_set_rate= 1/5):
+        a = 0
+
+class TitanicDataset:
+    def __init__(self,  data_path):
+        a = 0
