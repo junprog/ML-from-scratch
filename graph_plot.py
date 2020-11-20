@@ -1,6 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+name01 = "results/train_unit_2.log"
+name02 = "results/test_unit_2.log"
+
+name03 = "results/train_unit_4.log"
+name04 = "results/test_unit_4.log"
+
+name05 = "results/train_unit_8.log"
+name06 = "results/test_unit_8.log"
+
+name07 = "results/train_unit_16.log"
+name08 = "results/test_unit_16.log"
+"""
+
 data01 = np.loadtxt("results/train_with_sigmoid.log", skiprows=1, unpack=True)
 data02 = np.loadtxt("results/test_with_sigmoid.log", skiprows=1, unpack=True)
 
