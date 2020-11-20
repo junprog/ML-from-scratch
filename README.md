@@ -12,7 +12,7 @@ Creating Neural Network from Scratch with Numpy (multi-class classification)
     * Cross Entoropy
     
 * Optimizer
-    * SGD (with Momentum)
+    * SGD
 
 ## Run
 * requirements
