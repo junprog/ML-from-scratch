@@ -1,9 +1,7 @@
-import csv
 import numpy as np
-import scipy.stats
 
 import nn.Module as nn
-from utils import AverageMeter, Logger
+from utils import AverageMeter, Logger, IrisDataset
 
 class NeuralNet:
     def __init__(self, in_dim=8, activation='sigmoid'):
@@ -37,40 +35,17 @@ class NeuralNet:
         self.fc2.bias -= lr * self.fc2.bias_grad
 
 if __name__ == '__main__':
-    np.random.seed(seed=765) ## random seed
 
-    train_logger = Logger('results/train.log', ['epoch', 'loss', 'acc'])
-    test_logger = Logger('results/test.log', ['epoch', 'loss', 'acc'])
+    ## dfine logger & meter
+    train_logger = Logger('train.log', ['epoch', 'loss', 'acc'])
+    test_logger = Logger('test.log', ['epoch', 'loss', 'acc'])
 
     losses = AverageMeter()
     accs = AverageMeter()
 
-    ## Data load
-    data = np.loadtxt("data/iris.csv", delimiter=",", skiprows=1, usecols=(0,1,2,3))
-    data = scipy.stats.zscore(data) ## normalization with scipy
-
-    gt = np.loadtxt("data/iris.csv", delimiter = ",", skiprows=1, usecols=4, dtype=str)
-
-    ## One hot encoding
-    gt = [s.replace("Setosa", str(0)).strip('"') for s in gt]
-    gt = [s.replace("Versicolor", str(1)).strip('"') for s in gt]
-    gt = [s.replace("Virginica", str(2)).strip('"') for s in gt]
-    gt = [int(n) for n in gt]
-    gt = np.identity(3)[gt]
-
-    ## concat data & target
-    all_data = np.concatenate([data, gt], 1)
-
-    ## split train & test set
-    train_num = int(all_data.shape[0] * 4/5)
-    test_num = int(all_data.shape[0] * 1/5)
-
-    all_idx = np.random.choice(all_data.shape[0], all_data.shape[0], replace=False)
-    train_idx = all_idx[0:train_num]
-    test_idx = all_idx[train_num:all_data.shape[0]]
-
-    train_data = all_data[train_idx]
-    test_data = all_data[test_idx]
+    ## data load
+    iris = IrisDataset("data/iris.csv")
+    train_data, test_data = iris.split()
 
     ## Hyper params
     epoch = 300

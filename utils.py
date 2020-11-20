@@ -1,4 +1,7 @@
 import csv
+
+import numpy as np
+import scipy.stats
 import pandas as pd
 
 class AverageMeter:
@@ -38,8 +41,36 @@ class Logger:
         self.log_file.flush()
 
 class IrisDataset:
-    def __init__(self, data_path, test_set_rate= 1/5):
-        a = 0
+    np.random.seed(seed=765) ## random seed
+    def __init__(self, data_path):
+        ## Data load
+        self.data = np.loadtxt(data_path, delimiter=",", skiprows=1, usecols=(0,1,2,3))
+        self.data = scipy.stats.zscore(self.data) ## normalization with scipy
+        self.gt = np.loadtxt(data_path, delimiter = ",", skiprows=1, usecols=4, dtype=str)
+
+        ## One hot encoding
+        onehot = [s.replace("Setosa", str(0)).strip('"') for s in self.gt]
+        onehot = [s.replace("Versicolor", str(1)).strip('"') for s in onehot]
+        onehot = [s.replace("Virginica", str(2)).strip('"') for s in onehot]
+        onehot = [int(n) for n in onehot]
+        self.onehot = np.identity(3)[onehot]
+
+        ## concat data & target
+        self.all_data = np.concatenate([self.data, self.onehot], 1)
+
+    def split(self, test_set_rate=1/5):
+        ## split train & test set
+        train_num = int(self.all_data.shape[0] * (1 - test_set_rate))
+        test_num = int(self.all_data.shape[0] * test_set_rate)
+
+        all_idx = np.random.choice(self.all_data.shape[0], self.all_data.shape[0], replace=False)
+        train_idx = all_idx[0:train_num]
+        test_idx = all_idx[train_num:self.all_data.shape[0]]
+
+        self.train_data = self.all_data[train_idx]
+        self.test_data = self.all_data[test_idx]
+
+        return self.train_data, self.test_data
 
 class TitanicDataset:
     def __init__(self,  data_path):
