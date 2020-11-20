@@ -1,5 +1,5 @@
 # NN-from-scratch
-Create Neural Network from Scratch with Numpy (multi-class classification)
+Creating Neural Network from Scratch with Numpy (multi-class classification)
 
 ## Essestials
 * Neural Network model

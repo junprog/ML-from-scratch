@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+#import scipy.stats
 
 import nn.Module as nn
 from utils import AverageMeter, Logger
@@ -7,7 +8,7 @@ from utils import AverageMeter, Logger
 class NeuralNet:
     def __init__(self, in_dim=8):
         self.fc1  = nn.Linear(4,in_dim)
-        self.sigmoid = nn.Sigmoid()
+        self.sigmoid = nn.ReLU()
         self.fc2 = nn.Linear(in_dim,3)
 
         self.criterion = nn.CrossEntropyLoss()
@@ -33,14 +34,16 @@ class NeuralNet:
         self.fc2.bias -= lr * self.fc2.bias_grad
 
 if __name__ == '__main__':
-    train_logger = Logger('train.log', ['epoch', 'loss', 'acc'])
-    test_logger = Logger('test.log', ['epoch', 'loss', 'acc'])
+    train_logger = Logger('results/train.log', ['epoch', 'loss', 'acc'])
+    test_logger = Logger('results/test.log', ['epoch', 'loss', 'acc'])
 
     losses = AverageMeter()
     accs = AverageMeter()
 
     ## Data load
     data = np.loadtxt("data/iris.csv", delimiter=",", skiprows=1, usecols=(0,1,2,3))
+    #data = scipy.stats.zscore(data) ## normalization with scipy
+
     gt = np.loadtxt("data/iris.csv", delimiter = ",", skiprows=1, usecols=4, dtype=str)
 
     ## One hot encoding
