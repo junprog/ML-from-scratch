@@ -37,10 +37,10 @@ class NeuralNet:
         self.fc2.bias -= lr * self.fc2.bias_grad
 
 if __name__ == '__main__':
-    np.random.seed(seed=765)
+    np.random.seed(seed=765) ## random seed
 
-    train_logger = Logger('results/train_with_sigmoid.log', ['epoch', 'loss', 'acc'])
-    test_logger = Logger('results/test_with_sigmoid.log', ['epoch', 'loss', 'acc'])
+    train_logger = Logger('results/train.log', ['epoch', 'loss', 'acc'])
+    test_logger = Logger('results/test.log', ['epoch', 'loss', 'acc'])
 
     losses = AverageMeter()
     accs = AverageMeter()
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     epoch = 300
     lr = 0.01
 
-    ## define Model & Loss
+    ## define Model
     model = NeuralNet(in_dim=8, activation='sigmoid')
 
     ## Roop
