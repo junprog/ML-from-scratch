@@ -1,7 +1,10 @@
-# NN-from-scratch
-Creating Neural Network from Scratch with Numpy (multi-class classification)
+# ML-from-scratch
+Creating Machine Learning Model from Scratch with Numpy
 
-## 1. Essestials
+
+# 1. Neural Network
+
+## 1.1 Essestials
 * Neural Network model
     * Linear layer
     * Activation function
@@ -14,7 +17,7 @@ Creating Neural Network from Scratch with Numpy (multi-class classification)
 * Optimizer
     * Gradient Descent
 
-## 2. How to use
+## 1.2 How to use
 ```python
 ## import this
 import nn.Module as nn
@@ -49,7 +52,7 @@ model = NN() ## instance
 
 ```
 
-## 3. Run
+## 1.3 Run
 * requirements
     * python >= 3.6
     * numpy == 1.18.1 (ambiguous)
