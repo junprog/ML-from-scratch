@@ -42,10 +42,11 @@ class Logger:
 
 class IrisDataset:
     np.random.seed(seed=765) ## random seed
-    def __init__(self, data_path):
+    def __init__(self, data_path, norm=True):
         ## Data load
         self.data = np.loadtxt(data_path, delimiter=",", skiprows=1, usecols=(0,1,2,3))
-        self.data = scipy.stats.zscore(self.data) ## normalization with scipy
+        if norm == True:
+            self.data = scipy.stats.zscore(self.data) ## normalization with scipy
         self.gt = np.loadtxt(data_path, delimiter = ",", skiprows=1, usecols=4, dtype=str)
 
         ## One hot encoding

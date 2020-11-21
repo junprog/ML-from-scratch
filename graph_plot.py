@@ -19,7 +19,7 @@ data01 = np.loadtxt("results/train_with_sigmoid.log", skiprows=1, unpack=True)
 data02 = np.loadtxt("results/test_with_sigmoid.log", skiprows=1, unpack=True)
 
 data03 = np.loadtxt("results/train_with_sigmoid_without_norm.log", skiprows=1, unpack=True)
-data04 = np.loadtxt("results/train_with_sigmoid_without_norm.log", skiprows=1, unpack=True)
+data04 = np.loadtxt("results/test_with_sigmoid_without_norm.log", skiprows=1, unpack=True)
 
 data05 = np.loadtxt("results/train_with_ReLU.log", skiprows=1, unpack=True)
 data06 = np.loadtxt("results/test_with_ReLU.log", skiprows=1, unpack=True)

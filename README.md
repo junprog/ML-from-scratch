@@ -12,7 +12,7 @@ Creating Neural Network from Scratch with Numpy (multi-class classification)
     * Cross Entoropy
     
 * Optimizer
-    * SGD
+    * Gradient Descent
 
 ## 2. How to use
 ```python
@@ -38,7 +38,7 @@ class NN:
         dy = self.fc.backward(dy)
         ...
     
-    def update_params(self, lr=1e-1): ## update params with SGD
+    def update_params(self, lr=1e-1): ## update params with GD
         self.fc1.weight -= lr * self.fc1.weight_grad
         self.fc1.bias -= lr * self.fc1.bias_grad
 

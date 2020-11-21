@@ -44,7 +44,7 @@ if __name__ == '__main__':
     accs = AverageMeter()
 
     ## data load
-    iris = IrisDataset("data/iris.csv")
+    iris = IrisDataset("data/iris.csv", norm=True)
     train_data, test_data = iris.split()
 
     ## Hyper params
@@ -84,60 +84,60 @@ if __name__ == '__main__':
             
         if epoch % 10 == 0:
             print("[Train] epoch:{} \tloss:{} \tacc:{}".format(epoch, losses.avg, accs.avg))
+    
+    ## Test
+    losses.reset()
+    accs.reset()
+
+    corr_0 = 0.0
+    corr_1 = 0.0
+    corr_2 = 0.0
+    num_0 = 0.0
+    num_1 = 0.0
+    num_2 = 0.0
+    for data in test_data:
+        acc_flag = 0
+
+        inputs = data[np.newaxis, 0:4]
+        target = data[np.newaxis, 4:7]
+
+        out, loss = model.forward(inputs, target)
+
+        if np.argmax(out) == np.argmax(target):
+            acc_flag = 1
         
-        ## Test
-        losses.reset()
-        accs.reset()
-
-        corr_0 = 0.0
-        corr_1 = 0.0
-        corr_2 = 0.0
-        num_0 = 0.0
-        num_1 = 0.0
-        num_2 = 0.0
-        for data in test_data:
-            acc_flag = 0
-
-            inputs = data[np.newaxis, 0:4]
-            target = data[np.newaxis, 4:7]
-
-            out, loss = model.forward(inputs, target)
-
+        if np.argmax(target) == 0:
+            # Setosa
+            num_0 += 1.0
             if np.argmax(out) == np.argmax(target):
-                acc_flag = 1
-            
-            if np.argmax(target) == 0:
-                # Setosa
-                num_0 += 1.0
-                if np.argmax(out) == np.argmax(target):
-                    corr_0 += 1.0
+                corr_0 += 1.0
 
-            if np.argmax(target) == 1:
-                # Versicolor
-                num_1 += 1.0
-                if np.argmax(out) == np.argmax(target):
-                    corr_1 += 1.0
+        if np.argmax(target) == 1:
+            # Versicolor
+            num_1 += 1.0
+            if np.argmax(out) == np.argmax(target):
+                corr_1 += 1.0
 
-            if np.argmax(target) == 2:
-                # Virginica
-                num_2 += 1.0
-                if np.argmax(out) == np.argmax(target):
-                    corr_2 += 1.0
+        if np.argmax(target) == 2:
+            # Virginica
+            num_2 += 1.0
+            if np.argmax(out) == np.argmax(target):
+                corr_2 += 1.0
 
 
-            losses.update(loss)
-            accs.update(acc_flag)
+        losses.update(loss)
+        accs.update(acc_flag)
 
-        print("Setosa acc : ", corr_0/num_0)
-        print("Versicolor acc : ", corr_1/num_1)
-        print("Virginica acc : ", corr_2/num_2)
+    print("Setosa acc : ", corr_0/num_0)
+    print("Versicolor acc : ", corr_1/num_1)
+    print("Virginica acc : ", corr_2/num_2)
 
-        test_logger.log({
-            'epoch': epoch,
-            'loss': losses.avg,
-            'acc_0': corr_0/num_0,
-            'acc_1': corr_1/num_1,
-            'acc_2': corr_2/num_2,})
+    test_logger.log({
+        'epoch': epoch,
+        'loss': losses.avg,
+        'acc_0': corr_0/num_0,
+        'acc_1': corr_1/num_1,
+        'acc_2': corr_2/num_2,})
 
-        if epoch % 10 == 0:
-            print("[Test] epoch:{} \tloss:{} \tacc:{}".format(epoch, losses.avg, accs.avg))
+    if epoch % 10 == 0:
+        print("[Test] epoch:{} \tloss:{} \tacc:{}".format(epoch, losses.avg, accs.avg))
