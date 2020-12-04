@@ -41,7 +41,7 @@ class Logger:
         self.log_file.flush()
 
 class IrisDataset:
-    np.random.seed(seed=765) ## random seed
+    np.random.seed(seed=765) ## set random seed
     def __init__(self, data_path, norm=True):
         ## Data load
         self.data = np.loadtxt(data_path, delimiter=",", skiprows=1, usecols=(0,1,2,3))

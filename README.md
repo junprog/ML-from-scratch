@@ -1,10 +1,14 @@
 # ML-from-scratch
 Creating Machine Learning Model from Scratch with Numpy
 
+## To Do
+* [x] Neural Nework
+    * [ ] Current dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
+* [ ] Naive Bayes Classfier
 
-# 1. Neural Network
+## 1. Neural Network
 
-## 1.1 Essestials
+### 1.1 Essestials
 * Neural Network model
     * Linear layer
     * Activation function
@@ -17,7 +21,7 @@ Creating Machine Learning Model from Scratch with Numpy
 * Optimizer
     * Gradient Descent
 
-## 1.2 How to use
+### 1.2 How to use
 ```python
 ## import this
 import nn.Module as nn
@@ -52,7 +56,7 @@ model = NN() ## instance
 
 ```
 
-## 1.3 Run
+### 1.3 Run
 * requirements
     * python >= 3.6
     * numpy == 1.18.1 (ambiguous)
