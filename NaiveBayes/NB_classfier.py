@@ -1,3 +1,4 @@
+import re
 import numpy as np
 from numpy.core.fromnumeric import _sum_dispatcher
 
@@ -7,6 +8,7 @@ class NaiveBayes():
 
         self.mode = mode
         self.sigma = None
+        self.eps = 1e-323
     
     def fit(self, data, target): ## [入力 : data (features)]が得られる時に[出力 : target (label)]が得られる[確率 : p(Y|X)]を最大化
         assert data.shape[0] == target.shape[0], "The num of sample of X & Y is different"
@@ -34,18 +36,15 @@ class NaiveBayes():
     def pred(self, data):
         assert self.sigma is not None, "This model have not been fitted yet"
 
-        log_prior = np.log(self.pi)
-
-        sum_list = []
+        likeli_list = []
         for d in data:
-            sum = []
-            sum = [np.sum(self._norm(d, self.mu[c], self.sigma[c]), axis=0) for c in range(self.num_class)]
-            sum_list.append(sum)
-
-        log_posterior = np.array(sum_list)
+            log_likeli = np.log(self.pi) + [np.sum(self._log_norm(d, self.mu[c], self.sigma[c]), axis=0) for c in range(self.num_class)]
+            likeli_list.append(log_likeli)
         
-        return log_prior + log_posterior
+        return np.array(likeli_list)
 
-    def _norm(self, x, mu, sigma):
-        tmp =  np.exp(-(x - mu)**2 / (2*sigma**2))
-        return (1 / (np.sqrt(2*np.pi)*sigma)) * tmp
+    def _log_norm(self, x, mu, sigma):
+        term_1 = -(1/2)*np.log(2*np.pi)
+        term_2 = -np.log(sigma + self.eps)
+        term_3 = -((x - mu)**2) / ((2*sigma) + self.eps)
+        return term_1 + term_2 + term_3
