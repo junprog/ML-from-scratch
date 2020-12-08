@@ -65,5 +65,39 @@ model = NN() ## instance
     * scipy == 1.5.2  (ambiguous)
     * pandas (only titanic datasets)
 ```bash
-$ python main.py
+$ python main_nn.py
+```
+
+
+## 2. Naive Bayes Classfier
+Now, only support the gaussian naive bayes
+
+### 2.1 Essential
+* Naive Bayes Classfier
+    * Gaussian model
+    * Bernoulli model (not supported)
+
+### 2.2 How to use
+```python
+## import this
+import NaiveBayes.NB_classfier as NB
+
+## define Naive Bayes model
+model = NB.NaiveBayes(mode='gaussian') ## instance
+
+## Code for training 
+model.fit(train_data['data'], train_data['target'])
+
+## Code for prediction
+pred = model.pred(test_data['data'])
+```
+
+### 2.3 Run
+* requirements
+    * python >= 3.6
+    * numpy == 1.18.1 (ambiguous)
+    * scipy == 1.5.2  (ambiguous)
+    * pandas (only titanic datasets)
+```bash
+$ python main_nb.py
 ```
