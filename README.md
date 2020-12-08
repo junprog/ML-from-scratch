@@ -3,7 +3,7 @@ Creating Machine Learning Model from Scratch with Numpy
 
 ## To Do
 * [x] Neural Nework
-* [x] Naive Bayes Classfier
+* [x] Naive Bayes Classifier
 
 * [x] dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
 * [ ] Not using Scipy
@@ -69,18 +69,18 @@ $ python main_nn.py
 ```
 
 
-## 2. Naive Bayes Classfier
+## 2. Naive Bayes Classifier
 Now, only support the gaussian naive bayes
 
 ### 2.1 Essential
-* Naive Bayes Classfier
+* Naive Bayes Classifier
     * Gaussian model
     * Bernoulli model (not supported)
 
 ### 2.2 How to use
 ```python
 ## import this
-import NaiveBayes.NB_classfier as NB
+import NaiveBayes.NB_classifier as NB
 
 ## define Naive Bayes model
 model = NB.NaiveBayes(mode='gaussian') ## instance

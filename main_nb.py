@@ -1,6 +1,6 @@
 import numpy as np
 
-import NaiveBayes.NB_classfier as NB
+import NaiveBayes.NB_classifier as NB
 from utils import AverageMeter, IrisDataset
 
 if __name__ == '__main__':
