@@ -1,4 +1,3 @@
-from os import X_OK
 import numpy as np
 
 import NaiveBayes.NB_classfier as NB
@@ -14,17 +13,15 @@ if __name__ == '__main__':
 
     model = NB.NaiveBayes(mode='gaussian')
 
-    X = train_data[:, 0:4]
-    Y = train_data[:, 4:7]
+    model.fit(train_data['data'], train_data['target']) ## training the model
 
-    model.fit(X, Y) ## training the model
-
-    pred = model.pred(test_data[:,0:4]) ## prediction
+    pred = model.pred(test_data['data']) ## prediction
     
+    ## evalation
     for i, p in enumerate(pred):
         flag = 0
-        print('{} \t {}'.format(p, test_data[i,4:7]))
-        if np.argmax(p) == np.argmax(test_data[i,4:7]):
+        print('{} \t {}'.format(p, test_data['target'][i]))
+        if np.argmax(p) == np.argmax(test_data['target'][i]):
             flag = 1
         accs.update(flag)
 

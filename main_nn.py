@@ -60,11 +60,11 @@ if __name__ == '__main__':
         ## Training
         losses.reset()
         accs.reset()
-        for data in train_data:
+        for inputs, target in zip(train_data['data'], train_data['target']):
             acc_flag = 0
 
-            inputs = data[np.newaxis, 0:4]
-            target = data[np.newaxis, 4:7]
+            inputs = inputs[np.newaxis,:] ## unsqueeze for transpose
+            target = target[np.newaxis,:] ## unsqueeze for transpose
 
             out, loss = model.forward(inputs, target)
 
@@ -95,11 +95,11 @@ if __name__ == '__main__':
     num_0 = 0.0
     num_1 = 0.0
     num_2 = 0.0
-    for data in test_data:
+    for inputs, target in zip(test_data['data'], test_data['target']):
         acc_flag = 0
 
-        inputs = data[np.newaxis, 0:4]
-        target = data[np.newaxis, 4:7]
+        inputs = inputs[np.newaxis, :]
+        target = target[np.newaxis, :]
 
         out, loss = model.forward(inputs, target)
 

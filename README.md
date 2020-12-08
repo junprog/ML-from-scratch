@@ -5,7 +5,7 @@ Creating Machine Learning Model from Scratch with Numpy
 * [x] Neural Nework
 * [x] Naive Bayes Classfier
 
-* [ ] Current dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
+* [x] dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
 * [ ] Not using Scipy
 
 ## 1. Neural Network
