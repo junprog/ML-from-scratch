@@ -6,7 +6,8 @@ Creating Machine Learning Model from Scratch with Numpy
 * [x] Naive Bayes Classifier
 
 * [x] dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
-* [ ] Not using Scipy
+* [x] Not using Scipy
+* [ ] Cross validation
 
 ## 1. Neural Network
 
@@ -62,7 +63,6 @@ model = NN() ## instance
 * requirements
     * python >= 3.6
     * numpy == 1.18.1 (ambiguous)
-    * scipy == 1.5.2  (ambiguous)
     * pandas (only titanic datasets)
 ```bash
 $ python main_nn.py
@@ -96,7 +96,6 @@ pred = model.pred(test_data['data'])
 * requirements
     * python >= 3.6
     * numpy == 1.18.1 (ambiguous)
-    * scipy == 1.5.2  (ambiguous)
     * pandas (only titanic datasets)
 ```bash
 $ python main_nb.py

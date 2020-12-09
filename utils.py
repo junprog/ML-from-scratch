@@ -1,7 +1,6 @@
 import csv
 
 import numpy as np
-import scipy.stats
 import pandas as pd
 
 class AverageMeter:
@@ -46,7 +45,7 @@ class IrisDataset:
         ## Data load
         self.data = np.loadtxt(data_path, delimiter=",", skiprows=1, usecols=(0,1,2,3))
         if norm == True:
-            self.data = scipy.stats.zscore(self.data) ## normalization with scipy
+            self.data = self._norm(self.data)
         self.gt = np.loadtxt(data_path, delimiter = ",", skiprows=1, usecols=4, dtype=str)
 
         ## One hot encoding
@@ -55,10 +54,6 @@ class IrisDataset:
         onehot = [s.replace("Virginica", str(2)).strip('"') for s in onehot]
         onehot = [int(n) for n in onehot]
         self.target = np.identity(3)[onehot]
-
-        ## data & target dict
-        #self.all_data  = {'data' : self.data, 'target' : self.onehot}
-        #self.all_data = np.concatenate([self.data, self.onehot], 1)
 
     def split(self, test_set_rate=1/5):
         ## split train & test set
@@ -72,6 +67,10 @@ class IrisDataset:
         self.test_data = {'data' : self.data[test_idx], 'target' : self.target[test_idx]}
 
         return self.train_data, self.test_data
+
+    def _norm(self, data):
+        out = (data - data.mean(axis=0)) / np.sqrt(data.var(axis=0))
+        return out
 
 class TitanicDataset:
     def __init__(self,  data_path):

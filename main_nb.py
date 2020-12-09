@@ -5,13 +5,14 @@ from utils import AverageMeter, IrisDataset
 
 if __name__ == '__main__':
 
+    print('--- One-shot validation ---')
     accs = AverageMeter()
 
     ## data load
     iris = IrisDataset("data/iris.csv", norm=True)
     train_data, test_data = iris.split(test_set_rate=1/5)
 
-    model = NB.NaiveBayes(mode='gaussian')
+    model = NB.NaiveBayes(mode='gaussian') ## define the model
 
     model.fit(train_data['data'], train_data['target']) ## training the model
 
@@ -20,9 +21,13 @@ if __name__ == '__main__':
     ## evalation
     for i, p in enumerate(pred):
         flag = 0
-        print('{} \t {}'.format(p, test_data['target'][i]))
+        #print('{} \t {}'.format(p, test_data['target'][i]))
         if np.argmax(p) == np.argmax(test_data['target'][i]):
             flag = 1
         accs.update(flag)
 
     print('Acurracy : ', accs.avg)
+
+    print('\n')
+
+    print('--- Cross validation ---')
