@@ -1,4 +1,3 @@
-import re
 import numpy as np
 from numpy.core.fromnumeric import _sum_dispatcher
 
