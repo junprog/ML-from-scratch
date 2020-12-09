@@ -31,16 +31,15 @@ if __name__ == '__main__':
 
     print('\n')
 
-    print('--- Cross validation ---')
-    accs.reset()
-
     k_fold = 5
+    print('--- {}-fold Cross validation ---'.format(k_fold))
     cross_list = iris.cross_validate_set(k=k_fold)
 
     model2 = NB.NaiveBayes(mode='gaussian') ## define the model
 
     acc_list = []
     for train_data, test_data in cross_list:
+        accs.reset()
         model2.fit(train_data['data'], train_data['target'])
         pred = model2.pred(test_data['data']) ## prediction
         

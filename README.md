@@ -2,13 +2,23 @@
 Creating Machine Learning Model from Scratch with Numpy
 
 ## To Do
+### Models
+* [ ] Linear Regression
+* [ ] Logistic Regression
+* [ ] Support Vector Machine
 * [x] Neural Nework
 * [x] Naive Bayes Classifier
+* [ ] Decision Tree
+* [ ] Random Forests
+* [ ] k-NN
 
-* [x] dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
+### Features
+* [x] Iris Dataset
+* [ ] Titanic Dataset
 * [x] Not using Scipy
 * [x] Cross validation
     * only support equal-divide
+* [ ] Principal Component Analysis
 
 ## 1. Neural Network
 
