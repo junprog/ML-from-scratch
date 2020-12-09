@@ -45,7 +45,7 @@ class IrisDataset:
         ## Data load
         self.data = np.loadtxt(data_path, delimiter=",", skiprows=1, usecols=(0,1,2,3))
         if norm == True:
-            self.data = self._norm(self.data)
+            self.data = self._normal(self.data)
         self.gt = np.loadtxt(data_path, delimiter = ",", skiprows=1, usecols=4, dtype=str)
 
         ## One hot encoding
@@ -63,12 +63,27 @@ class IrisDataset:
         train_idx = all_idx[0:train_num]
         test_idx = all_idx[train_num:self.data.shape[0]]
 
-        self.train_data = {'data' : self.data[train_idx], 'target' : self.target[train_idx]}
-        self.test_data = {'data' : self.data[test_idx], 'target' : self.target[test_idx]}
+        train_data = {'data' : self.data[train_idx], 'target' : self.target[train_idx]}
+        test_data = {'data' : self.data[test_idx], 'target' : self.target[test_idx]}
 
-        return self.train_data, self.test_data
+        return train_data, test_data
 
-    def _norm(self, data):
+    def cross_validate_set(self, k=5):
+        ## return k-patterns train-test set
+        assert self.data.shape[0] % k == 0, "[Warning] can not equal split"
+        test_num = int(np.round(self.data.shape[0] / k))
+        all_idx = np.random.choice(self.data.shape[0], self.data.shape[0], replace=False)
+
+        cross_set = []
+        for i in range(k):                
+            test_idx = all_idx[i*test_num:(i+1)*test_num]
+            test_data = {'data' : self.data[test_idx], 'target' : self.target[test_idx]}
+            train_data = {'data' : np.delete(self.data, test_idx, axis=0), 'target' : np.delete(self.target, test_idx, axis=0)}
+            cross_set.append((train_data, test_data))
+
+        return cross_set
+
+    def _normal(self, data):
         out = (data - data.mean(axis=0)) / np.sqrt(data.var(axis=0))
         return out
 

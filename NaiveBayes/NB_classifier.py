@@ -38,12 +38,12 @@ class NaiveBayes():
 
         likeli_list = []
         for d in data:
-            log_likeli = np.log(self.pi) + [np.sum(self._log_norm(d, self.mu[c], self.sigma[c]), axis=0) for c in range(self.num_class)]
+            log_likeli = np.log(self.pi) + [np.sum(self._log_normal(d, self.mu[c], self.sigma[c]), axis=0) for c in range(self.num_class)]
             likeli_list.append(log_likeli)
         
         return np.array(likeli_list)
 
-    def _log_norm(self, x, mu, sigma):
+    def _log_normal(self, x, mu, sigma):
         term_1 = -(1/2)*np.log(2*np.pi)
         term_2 = -np.log(sigma + self.eps)
         term_3 = -((x - mu)**2) / ((2*sigma) + self.eps)
