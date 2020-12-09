@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     print('\n')
 
-    k_fold = 5
+    k_fold = 10
     print('--- {}-fold Cross validation ---'.format(k_fold))
     cross_list = iris.cross_validate_set(k=k_fold)
 
@@ -54,3 +54,4 @@ if __name__ == '__main__':
         acc_list.append(accs.avg)
 
     print('Acurracy : ', acc_list)
+    print('Avg : ', sum(acc_list)/len(acc_list))
