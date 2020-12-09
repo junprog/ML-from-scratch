@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     print('\n')
 
-    k_fold = 10
+    k_fold = 5
     print('--- {}-fold Cross validation ---'.format(k_fold))
     cross_list = iris.cross_validate_set(k=k_fold)
 
