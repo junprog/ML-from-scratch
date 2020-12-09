@@ -8,7 +8,7 @@ Creating Machine Learning Model from Scratch with Numpy
 * [x] dataset(concat(tarin,test)) -> dict('train' : trainset, 'test' : testset)
 * [x] Not using Scipy
 * [x] Cross validation
-    * not abailable equal-divide yet
+    * only support equal-divide
 
 ## 1. Neural Network
 
