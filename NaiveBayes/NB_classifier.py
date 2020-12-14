@@ -1,9 +1,7 @@
 import numpy as np
-from numpy.core.fromnumeric import _sum_dispatcher
 
 class NaiveBayes():
     def __init__(self, mode='gaussian') -> None:
-        super().__init__()
 
         self.mode = mode
         self.sigma = None
