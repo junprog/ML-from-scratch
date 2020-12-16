@@ -4,29 +4,29 @@ import nn.Module as nn
 from utils import AverageMeter, Logger, IrisDataset
 
 class DeepNeuralNet:
-    def __init__(self, in_dim=8, activation='sigmoid'):
-        self.fc1  = nn.Linear(4, in_dim)
+    def __init__(self, activation='sigmoid'):
+        self.fc1  = nn.Linear(4, 30)
 
         if activation == 'sigmoid':
             self.activation1 = nn.Sigmoid()
         elif activation == 'relu':
             self.activation1 = nn.ReLU()
 
-        self.fc2 = nn.Linear(in_dim, in_dim*2)
+        self.fc2 = nn.Linear(30, 50)
 
         if activation == 'sigmoid':
             self.activation2 = nn.Sigmoid()
         elif activation == 'relu':
             self.activation2 = nn.ReLU()
 
-        self.fc3 = nn.Linear(in_dim*2, in_dim)
+        self.fc3 = nn.Linear(50, 30)
 
         if activation == 'sigmoid':
             self.activation3 = nn.Sigmoid()
         elif activation == 'relu':
             self.activation3 = nn.ReLU()
 
-        self.fc4 = nn.Linear(in_dim, 3)
+        self.fc4 = nn.Linear(30, 3)
 
         self.criterion = nn.CrossEntropyLoss()
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     lr = 0.01
 
     ## define Model
-    model = DeepNeuralNet(in_dim=8, activation='sigmoid')
+    model = DeepNeuralNet(activation='relu')
 
     ## Roop
     for epoch in range(epoch):
