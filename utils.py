@@ -69,7 +69,7 @@ class IrisDataset:
         return train_data, test_data
 
     def cross_validate_set(self, k=5):
-        ## return k-patterns train-test set
+        ## return k-patterns train-test set (taple)
         assert self.data.shape[0] % k == 0, "[Warning] can not equal split"
         test_num = int(np.round(self.data.shape[0] / k))
         all_idx = np.random.choice(self.data.shape[0], self.data.shape[0], replace=False)
