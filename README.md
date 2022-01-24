@@ -42,7 +42,7 @@ import nn.Module as nn
 
 ## define Neural Network
 class NN:
-    def __init__(self): ## dfine layrs & loss
+    def __init__(self): ## define layrs & loss
         self.fc = nn.Linear(3, 16)
         ...
         self.criterin = nn.CrossEntopyLoss()
